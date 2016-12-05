@@ -1,0 +1,44 @@
+<%- include layout.ejs -%>
+<link rel="stylesheet" href="/s/css/chat.css">
+<div class="animsition container-fluid">
+  <div class="chat col-md-8 col-md-offset-2">
+    <div class="block row">
+      <div class="block-left block-content col-md-3">
+        <ul>
+          <li class="search"><input class="input"type="text" name="search" placeholder="Search"></li>
+          <% for( var i = 0; i < 20; i+=1 ) { %>
+          <li id="test<%=i%>" class="dialogs">
+            <div class="user">Johnny</div>
+            <div class="first"></div>
+          </li>
+          <% } %>
+        </ul>
+      </div>      
+      <div class="block-right block-content col-md-offset-3 col-md-8">
+        <div class="row content">
+          <ul>
+            <% for( var i = 0; i < 20; i+=1 ) { %>			
+            <li class="<% if (i%2 === 0){ %>from<% } else { %>to<% } %>"><span class="bubble">qqwertyuiopasdfghjkl;zxcvbnm,.fjdashfdshfsqwertyuiopasdfghjkl;zxcvbnm,.fjdashfdshfswertyuiopasdfghjkl;zxcvbnm,.fjdashfdshfs</span></li>
+            <% } %>
+          </ul>
+        </div>        
+        <div class="row msgEnter">
+          <input class="input" placeholder="Write a message..." name="message" autocomplete="off"/>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/s/js/socket.io.js"></script>
+<script>
+  $(function (){
+    var $scroll = $(".block-right .content");
+    $scroll.scrollTop( $scroll[0].scrollHeight);
+  });
+  var socket = io('http://localhost:<%=port%>');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
+<%- include footer.ejs -%>
