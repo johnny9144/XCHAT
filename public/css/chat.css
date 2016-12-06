@@ -32,11 +32,11 @@
   margin-bottom: 40px;
 }
 
-.block-right .from {
+.block-right .from span{
   float: right;
 }
 
-.block-right .to {
+.block-right .to span{
   float: left;
 }
 
@@ -49,13 +49,19 @@
 .block-left ul {
   list-style-type: none;
 }
-.dialogs {
+.friends {
   width: 90%;
   border-bottom-style: solid;
   border-color: white;
   height: 90px;
   color: white;
   padding: 10px;
+}
+
+.friends:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 .seach {
@@ -66,6 +72,7 @@
 .content {
   height: 89.2%;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .msgEnter .input, .search .input {
