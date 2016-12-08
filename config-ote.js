@@ -3,5 +3,5 @@ module.exports = {
     url: "http://localhost",
     port: 1337
   },
-  mongodb: "mongodb://localhost/local"
+  mongodb: "mongodb://localhost/chat"
 };

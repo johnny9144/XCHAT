@@ -3,5 +3,5 @@ module.exports = {
     url: "http://bowei.xeo.tw",
     port: 80
   },
-  mongodb: "mongodb://localhost/local"
+  mongodb: "mongodb://localhost/chat"
 };
