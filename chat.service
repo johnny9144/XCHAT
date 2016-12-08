@@ -1,0 +1,17 @@
+[Unit]
+Description=chat
+
+[Service]
+ExecStart=/home/bowei/.nvm/versions/node/v6.9.1/bin/node bin/www
+Restart=always
+RestartSec=10s
+WorkingDirectory=/home/bowei/chat
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=chat
+User=root
+Group=root
+Environment=DEBUG=dev:*
+
+[Install]
+WantedBy=multi-user.target
