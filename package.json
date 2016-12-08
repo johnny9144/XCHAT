@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "DEBUG=dev:* supervisor node ./bin/www"
+    "dev": "DEBUG=dev:* supervisor node ./bin/www",
+    "server": "sudo DEBUG=dev:* /home/bowei/.nvm/versions/node/v6.9.1/bin/node ./bin/www"
   },
   "dependencies": {
     "ain2": "^2.0.0",
