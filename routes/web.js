@@ -1,8 +1,8 @@
 "use strict";
-var debug = require("debug")("dev");
+var debug = require("debug")("dev:web.js");
 var express = require('express');
 var router = express.Router();
-var auth = require( __dirname + '/../Libs/auth');
+var auth = require( __dirname + '/../libs/auth');
 router.get( '/login', function ( req, res){
   res.render( 'login');
 });
@@ -22,8 +22,8 @@ router.post( '/login', function ( req, res){
   });
 });
 router.get( '/home', lr, function(req, res) {
-  res.render( 'chat', { user: req.session.user});
   debug(req.session.user);
+  res.render( 'chat', { user: req.session.user});
 });
 
 module.exports = router;

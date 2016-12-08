@@ -71,8 +71,8 @@
 
 .content {
   height: 89.2%;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .msgEnter .input, .search .input {

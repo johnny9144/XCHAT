@@ -36,7 +36,7 @@
   $(function (){
     var $scroll = $(".block-right .content");
     $scroll.scrollTop( $scroll[0].scrollHeight);
-    var socket = io('http://localhost:<%=port%>');
+    var socket = io('<%=serverInfo.IO%>');
     socket.on("connect", function (){
       if (user !== ""){
         socket.emit( 'regist', { secret: user});

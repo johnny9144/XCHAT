@@ -1,11 +1,10 @@
 "use strict";
-global.port;
 global.db;
-var debug = require('debug')('dev');
+var debug = require('debug')('dev:app.js');
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+// var favicon = require('serve-favicon');
+// var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
@@ -13,7 +12,7 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 var web = require('./routes/web');
-var socketIO = require(__dirname + '/libs/socketIO').IO(io);
+require(__dirname + '/libs/socketIO').IO(io);
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
@@ -29,13 +28,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/s', express.static(__dirname + '/public'));
 app.use(session({
-  store: new MongoStore({url: "mongodb://localhost/local"}),
+  store: new MongoStore({url: conf.mongodb}),
   resave: false,
   saveUninitialized: false,
   secret: 'rubyANdJohnny',
   cookie: { maxAge: 1000 * 60 * 60 * 24 },
 }));
-
+debug("app.js load");
 
 app.use(function ( req, res, next){
   var _render = res.render;
@@ -45,10 +44,11 @@ app.use(function ( req, res, next){
     }
 
     if (!opts) {
-      opts = {
-        port: global.port 
-      };
+      opts = {};
     }
+    opts.serverInfo = {
+      IO: conf.IO.url + ":" + conf.IO.port
+    };
     // User
     // if (req.session.user) {
     //   opts.user = {
@@ -59,7 +59,6 @@ app.use(function ( req, res, next){
     //     emailHash: require('crypto').createHash('md5').update( req.session.user.email).digest('hex')
     //   };
     // }
-    
     
     _render.call(res, view, opts, callback);
   };

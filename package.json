@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=dev supervisor node ./bin/www"
+    "dev": "DEBUG=dev:* supervisor node ./bin/www"
   },
   "dependencies": {
     "ain2": "^2.0.0",
