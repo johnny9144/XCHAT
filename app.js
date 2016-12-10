@@ -15,6 +15,8 @@ var web = require('./routes/web');
 require(__dirname + '/libs/socketIO').IO(io);
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
+var stylus = require("stylus");
+var nib = require("nib");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +28,21 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+// app.middleware(__dirname + '/public');
+if ( process.env.DEBUG.match(/dev/g )){
+  app.use( '/s',stylus.middleware({
+    src: __dirname + '/stylus',
+    dest: __dirname + '/public/css',
+    compile: compile
+  }));
+}
 app.use('/s', express.static(__dirname + '/public'));
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    // .set('compress', true)
+    .use(nib());
+}
 app.use(session({
   store: new MongoStore({url: conf.mongodb}),
   resave: false,

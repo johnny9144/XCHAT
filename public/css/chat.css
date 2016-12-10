@@ -1,45 +1,37 @@
 .chat {
   height: 1080px;
-  background: rgba( 0, 0, 0, 0.7);
+  background: rgba(0,0,0,0.7);
   border-radius: 40px;
 }
-
 .block {
-    padding: 3% 0 0 3%;
+  padding: 3% 0 0 3%;
 }
-
 .block-content {
   border-radius: 5px;
   border-style: solid;
-  border-color: white;
+  border-color: #fff;
   height: 1000px;
 }
-
 .block-right {
   margin-left: 3%;
   padding: 23px 27px 0px 27px;
 }
-
 .block-right .content ul {
   list-style-type: none;
   padding-top: 10px;
 }
-
 .block-right .content li {
-  color: white;
+  color: #fff;
   font-size: 28px;
   padding: 0 27px 0 0px;
   margin-bottom: 40px;
 }
-
-.block-right .from span{
+.block-right .from span {
   float: right;
 }
-
-.block-right .to span{
+.block-right .to span {
   float: left;
 }
-
 .block-right .span {
   width: 100px;
 }
@@ -52,113 +44,101 @@
 .friends {
   width: 90%;
   border-bottom-style: solid;
-  border-color: white;
+  border-color: #fff;
   height: 90px;
-  color: white;
+  color: #fff;
   padding: 10px;
 }
-
 .friends:hover {
   cursor: pointer;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #fff;
+  color: #000;
 }
-
 .seach {
   margin-top: 20px;
   margin-bottom: 10px;
 }
-
 .content {
   height: 89.2%;
   overflow-x: hidden;
   overflow-y: scroll;
 }
-
-.msgEnter .input, .search .input {
-  display:block;
-  width:100%;
-  position:relative;
-  border-radius:6px;
-  font-size:1rem;
+.msgEnter .input,
+.search .input {
+  display: block;
+  width: 100%;
+  position: relative;
+  border-radius: 6px;
+  font-size: 1rem;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.4);
   color: rgba(255,255,255,0.4);
   padding: 10px 20px;
 }
-
-.msgEnter .input:-webkit-input-placeholder, .search .input:-webkit-input-placeholder{
-  color:white;
+.msgEnter .input:-webkit-input-placeholder,
+.search .input:-webkit-input-placeholder {
+  color: #fff;
   font-size: 1.2rem;
-  font-family:Raleway;
-  line-height:1.3rem;
-  font-weight:200;
+  font-family: Raleway;
+  line-height: 1.3rem;
+  font-weight: 200;
 }
-
-.msgEnter .input:focus, .search .input:focus{
-  outline:none;
-  color:white;
-  border: 1px solid white;
+.msgEnter .input:focus,
+.search .input:focus {
+  outline: none;
+  color: #fff;
+  border: 1px solid #fff;
 }
-
-.msgEnter .input:hover, .search .input:hover{
-  border:1px solid white;
+.msgEnter .input:hover,
+.search .input:hover {
+  border: 1px solid #fff;
 }
-
 .msgEnter .input {
   height: 93px;
   font-size: 36px;
 }
-
 .search .input {
   width: 60%;
   margin-top: 4%;
 }
-
-.bubble 
-{
-position: relative;
-padding: 7px;
--webkit-border-radius: 25px 28px 25px 25px;
--moz-border-radius: 25px 28px 25px 25px;
-border-radius: 25px 28px 25px 25px;
-word-wrap: break-word;
-    display: block;
-    max-width: 540px;<Paste>
+.bubble {
+  position: relative;
+  padding: 7px;
+  -webkit-border-radius: 25px 28px 25px 25px;
+  -moz-border-radius: 25px 28px 25px 25px;
+  border-radius: 25px 28px 25px 25px;
+  word-wrap: break-word;
+  display: block;
+  max-width: 540px;
 }
-
+.bubble:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  display: block;
+  width: 0;
+  z-index: 1;
+  top: -2px;
+}
 .from .bubble {
   background: #4caf50;
 }
-
+.from .bubble:after {
+  border-width: 7px 0 7px 26px;
+  right: -16px;
+  -ms-transform: rotate(-41deg) /* IE 9 */;
+  -webkit-transform: rotate(-41deg) /* Chrome, Safari, Opera */;
+  transform: rotate(-41deg);
+  border-color: transparent #4caf50;
+}
 .to .bubble {
   background: #344ede;
 }
-
-.bubble:after 
-{
-content: '';
-position: absolute;
-border-style: solid;
-display: block;
-width: 0;
-z-index: 1;
-top: -2px;
-}
-
-.from .bubble:after {
-    border-width: 7px 0 7px 26px;
-right: -16px;
--ms-transform: rotate(-41deg); /* IE 9 */
--webkit-transform: rotate(-41deg); /* Chrome, Safari, Opera */
-transform: rotate(-41deg);
-border-color: transparent #4caf50;
-} 
 .to .bubble:after {
-border-width: 7px 26px 7px 0;
-left: -16px;
--ms-transform: rotate(41deg); /* IE 9 */
--webkit-transform: rotate(41deg); /* Chrome, Safari, Opera */
-transform: rotate(41deg);
-border-color: transparent #344ede;
-} 
+  border-width: 7px 26px 7px 0;
+  left: -16px;
+  -ms-transform: rotate(41deg) /* IE 9 */;
+  -webkit-transform: rotate(41deg) /* Chrome, Safari, Opera */;
+  transform: rotate(41deg);
+  border-color: transparent #344ede;
+}
