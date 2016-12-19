@@ -28,6 +28,7 @@
     },
     "globals": {
       "$": false,
-      "conf": false
+      "conf": false,
+      "db": false
     }
 }

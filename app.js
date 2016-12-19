@@ -11,12 +11,13 @@ var http = require('http');
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
-var web = require('./routes/web');
-require(__dirname + '/libs/socketIO').IO(io);
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var stylus = require("stylus");
 var nib = require("nib");
+var web = require('./routes/web');
+var api = require('./routes/api');
+require(__dirname + '/libs/socketIO').IO(io);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,13 +30,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.middleware(__dirname + '/public');
-if ( process.env.DEBUG.match(/dev/g )){
+if ( process.env.DEBUG && process.env.DEBUG.match(/dev/g )){
   app.use( '/s',stylus.middleware({
     src: __dirname + '/stylus',
     dest: __dirname + '/public/css',
     compile: compile
   }));
 }
+
 app.use('/s', express.static(__dirname + '/public'));
 function compile(str, path) {
   return stylus(str)
@@ -43,6 +45,7 @@ function compile(str, path) {
     // .set('compress', true)
     .use(nib());
 }
+
 app.use(session({
   store: new MongoStore({url: conf.mongodb}),
   resave: false,
@@ -50,6 +53,7 @@ app.use(session({
   secret: 'rubyANdJohnny',
   cookie: { maxAge: 1000 * 60 * 60 * 24 },
 }));
+
 debug("app.js load");
 
 app.use(function ( req, res, next){
@@ -82,6 +86,8 @@ app.use(function ( req, res, next){
   next();
 
 });
+
+app.use('/api', api);
 app.use('/', web);
 
 // catch 404 and forward to error handler

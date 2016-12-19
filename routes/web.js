@@ -7,10 +7,13 @@ router.get( '/login', function ( req, res){
   res.render( 'login');
 });
 
+router.get( '/', function ( req, res){
+  res.render( 'login');
+});
+
 router.post( '/login', function ( req, res){
   var data = req.body;
   auth.login( data.username, data.password, function ( doc) {
-    // debug(doc);
     if ( doc){
       req.session.user = {
         _id: doc._id.toString(),
@@ -21,8 +24,9 @@ router.post( '/login', function ( req, res){
     return res.send({ code: 200, data: doc});
   });
 });
+
 router.get( '/home', lr, function(req, res) {
-  debug(req.session.user);
+  debug(req.session.user + "login");
   res.render( 'chat', { user: req.session.user});
 });
 
