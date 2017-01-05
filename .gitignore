@@ -6,3 +6,5 @@ config-server.js
 config-ote.js
 public/jsOut/
 public/css/
+config-ote.js
+config-server.js
