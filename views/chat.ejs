@@ -6,17 +6,13 @@
       <div class="block-left block-content col-md-3">
         <ul>
           <li class="search"><input class="input"type="text" name="search" placeholder="Search"></li>
-          <% if (user._id !== "58423f1f18171f23396c485e"){ %>
-          <li data-target="58423f1f18171f23396c485e" class="friends">
-            <div class="user">Johnny</div>
-            <div class="first"></div>
-          </li>
-          <% } else { %>
-          <li data-target="5846c6afe974967e1a796f38" class="friends">
-            <div class="user">Ruby</div>
+          <% for( var key in user.friends) { %>
+          <li data-target="<%= key %>" class="friends">
+            <div class="user"><%=user.friends[key].name%></div>
             <div class="first"></div>
           </li>
           <% } %>
+
         </ul>
       </div>      
       <div class="block-right block-content col-md-offset-3 col-md-8">
@@ -31,14 +27,15 @@
     </div>
   </div>
 </div>
-<script src="/s/jsOutOut/socket.io.js"></script>
+<script src="/s/js/socket.io.js"></script>
 <script>
-var $scroll = $(".block-right .content");
-var user = "<% if (user) { %><%= user._id %><% } %>";
-if ( !user) {
+var $SCROLL = $(".block-right .content");
+var ENV = "<% if ( env === "production" ) { %>production<% } %>";
+var USER = "<% if (user) { %><%= user._id %><% } %>";
+if ( !USER) {
   location.href( "/login");
 }
-var socket = io('<%=serverInfo.IO%>');
+var SOCKET = io('<%=serverInfo.IO%>');
 </script>
 <script src="/s/js/chat.js"></script>
 <%- include footer.ejs -%>

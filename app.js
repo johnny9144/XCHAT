@@ -67,8 +67,14 @@ app.use(function ( req, res, next){
       opts = {};
     }
     opts.serverInfo = {
-      IO: conf.IO.url + ":" + conf.IO.port
+      IO: conf.IO.url + ":" + conf.IO.port,
     };
+
+    if ( process.env.NODE_CHAT && process.env.NODE_CHAT === "production" ) {
+      opts.env = "production";
+    } else {
+      opts.env = "dev";
+    }
     // User
     // if (req.session.user) {
     //   opts.user = {
