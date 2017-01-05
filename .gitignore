@@ -4,3 +4,5 @@ npm-debug.log
 config.js
 public/jsOut/
 public/css/
+config-ote.js
+config-server.js
