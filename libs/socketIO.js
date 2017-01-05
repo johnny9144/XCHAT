@@ -21,6 +21,8 @@ self.IO = function ( io) {
     socket.on( 'msgIn', function (data) {
       debug( data);
       // 檢查資料格式
+      // 要檢查 data.from 和 session 的 user有沒有一樣，或是直接捨棄data.from 
+      // 直接用 req.session.user 取代
       if ( data && data.target && data.msg){
         var target = userStatus[data.target];
         async.waterfall([
@@ -45,6 +47,12 @@ self.IO = function ( io) {
                   if ( err) {
                     return debug( err);
                   }
+                  var temp = { $set: {} };
+                  temp.$set["friends."+data.target+".roomId"] = init._id.toString();
+                  db.collection("user").updateOne({ _id: ObjectID( data.from)}, temp);
+                  temp = { $set: {} };
+                  temp.$set["friends."+data.from+".roomId"] = init._id.toString();
+                  db.collection("user").updateOne({ _id: ObjectID( data.target)}, temp);
                   room[data.target+data.from] = init._id.toString();
                   return done( null, init._id);
                 });

@@ -16,14 +16,16 @@ router.get( '/', function ( req, res){
 router.post( '/login', function ( req, res){
   var data = req.body;
   auth.login( data.username, data.password, function ( doc) {
-    if ( doc){
-      req.session.user = {
-        _id: doc._id.toString(),
-        email: doc.email,
-        name: doc.name,
-        friends: doc.friends
-      };
+    if ( !doc) {
+      return res.send({ code: 403, msg: "fail"});
     }
+    req.session.user = {
+      _id: doc._id.toString(),
+      email: doc.email,
+      name: doc.name,
+      friends: doc.friends
+    };
+
     return res.send({ code: 200, data: doc});
   });
 });
