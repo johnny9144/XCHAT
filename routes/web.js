@@ -36,6 +36,10 @@ router.get( '/registrar', function( req, res) {
   return res.render( 'registrar');
 });
 
+router.post( '/getMessages', function ( req, res) {
+
+});
+
 module.exports = router;
 
 function lr(req, res, next){
