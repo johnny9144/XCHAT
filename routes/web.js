@@ -3,8 +3,10 @@ var debug = require("debug")("dev:web.js");
 var express = require('express');
 var router = express.Router();
 var auth = require( __dirname + '/../libs/auth');
+
+debug( "load");
 router.get( '/login', function ( req, res){
-  return res.render( 'login');
+  return res.render( 'member/login');
 });
 
 router.get( '/', function ( req, res){
@@ -18,7 +20,8 @@ router.post( '/login', function ( req, res){
       req.session.user = {
         _id: doc._id.toString(),
         email: doc.email,
-        name: doc.name
+        name: doc.name,
+        friends: doc.friends
       };
     }
     return res.send({ code: 200, data: doc});
@@ -26,8 +29,7 @@ router.post( '/login', function ( req, res){
 });
 
 router.get( '/home', lr, function(req, res) {
-  debug(req.session.user + "login");
-  return res.render( 'chat', { user: req.session.user});
+  return res.render( 'chat', { user: req.session.user });
 });
 
 router.get( '/registrar', function( req, res) {

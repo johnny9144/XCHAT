@@ -1,16 +1,16 @@
 /*eslint-env browser*/
-/* globals $scroll, socket, user*/
+/* globals $SCROLL, SOCKET, USER*/
 $(function (){
-  // $scroll.scrollTop( $scroll[0].scrollHeight);
-  socket.on("connect", function (){
-    if (user !== ""){
-      socket.emit( 'regist', { secret: user});
+  // $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
+  SOCKET.on("connect", function (){
+    if (USER !== ""){
+      SOCKET.emit( 'regist', { secret: USER});
     }
   });
-  socket.on('msgOut', function (data) {
+  SOCKET.on('msgOut', function (data) {
     receive(data);
   });
-  socket.on('disconnect', function (){
+  SOCKET.on('disconnect', function (){
     document.location.href="/login";
   });
 
@@ -18,7 +18,7 @@ $(function (){
     var code = e.keyCode ? e.keyCode : e.which;
     var $this = $(this);
     if ( code === 13 && $this.val().trim() !== ""){
-      sendMsg( socket, $this.val(), $this.data("target"));
+      sendMsg( SOCKET, $this.val(), $this.data("target"));
       $this.val("");
     }
   });
@@ -29,15 +29,15 @@ $(function (){
   });
 });
 
-function sendMsg( socket, msg, target) {
+function sendMsg( SOCKET, msg, target) {
   var from = "<li class=\"row from\"><span class=\"bubble\">"+ msg +"</span></li>";
   $(".content ul").append(from);
-  $scroll.scrollTop( $scroll[0].scrollHeight);
-  socket.emit('msgIn', { target: target, from: user, msg: msg});
+  $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
+  SOCKET.emit('msgIn', { target: target, from: USER, msg: msg});
 }
 function receive(data){
   var to = "<li class=\"row to\"><span class=\"bubble\">"+ data.msg +"</span></li>";
   $(".content ul").append(to);
-  $scroll.scrollTop( $scroll[0].scrollHeight);
+  $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
 }
 

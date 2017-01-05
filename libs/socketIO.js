@@ -69,15 +69,29 @@ self.IO = function ( io) {
             }
           });
 
-          for (var i = 0, imax = target.length; i < imax; i+=1){
-            try {
-              io.to(target[i]).emit( "msgOut", { from: data.from, msg: data.msg});
-            } catch(e) {
-              // 拿掉無法傳送的位置
-              userStatus[data.target].splice(userStatus[data.target].indexOf( userStatus[data.target][i]));
-              debug("fail when send msg: " + e);
-            }
+          if ( target && target.length > 0) {
+            async.each( target, function ( addr, next) {
+              try {
+                io.to( addr).emit( "msgOut", { from: data.from, msg: data.msg});
+              } catch(e) {
+                // 拿掉無法傳送的位置
+                userStatus[data.target].splice( userStatus[data.target].indexOf( userStatus[data.target][addr]));
+                debug("fail when send msg: " + e);
+              }
+              next();
+            }, function ( err) {
+              debug( "msg send");
+            });
           }
+          // for (var i = 0, imax = target.length; i < imax; i+=1){
+          //   try {
+          //     io.to(target[i]).emit( "msgOut", { from: data.from, msg: data.msg});
+          //   } catch(e) {
+          //     拿掉無法傳送的位置
+          //     userStatus[data.target].splice(userStatus[data.target].indexOf( userStatus[data.target][i]));
+          //     debug("fail when send msg: " + e);
+          //   }
+          // }
         });
       } else {
         debug( "error format");
