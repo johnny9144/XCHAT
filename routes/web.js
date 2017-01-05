@@ -4,11 +4,11 @@ var express = require('express');
 var router = express.Router();
 var auth = require( __dirname + '/../libs/auth');
 router.get( '/login', function ( req, res){
-  res.render( 'login');
+  return res.render( 'login');
 });
 
 router.get( '/', function ( req, res){
-  res.render( 'login');
+  return res.render( 'member/login');
 });
 
 router.post( '/login', function ( req, res){
@@ -27,7 +27,11 @@ router.post( '/login', function ( req, res){
 
 router.get( '/home', lr, function(req, res) {
   debug(req.session.user + "login");
-  res.render( 'chat', { user: req.session.user});
+  return res.render( 'chat', { user: req.session.user});
+});
+
+router.get( '/registrar', function( req, res) {
+  return res.render( 'registrar');
 });
 
 module.exports = router;

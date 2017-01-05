@@ -1,5 +1,5 @@
 <%- include layout.ejs -%>
-<link rel="stylesheet" href="/s/css/chat.css">
+<link rel="stylesheet" href="/s/css/functions/chat.css">
 <div class="animsition container-fluid">
   <div class="chat col-md-8 col-md-offset-2">
     <div class="block row">
@@ -31,7 +31,7 @@
     </div>
   </div>
 </div>
-<script src="/s/js/socket.io.js"></script>
+<script src="/s/jsOutOut/socket.io.js"></script>
 <script>
 var $scroll = $(".block-right .content");
 var user = "<% if (user) { %><%= user._id %><% } %>";

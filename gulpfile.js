@@ -23,8 +23,14 @@ var js = [
 ];
 
 var jsOther = [
-  "./public/js/chat.js"
+  "./public/js/chat.js",
+  "./public/js/login.js"
 ];
+
+// var layout_inject = [
+//   "./views/member/login.ejs",
+//   "./views/chat.ejs"
+// ];
 
 gulp.task('other_js', function(){
   return gulp.src(jsOther)
@@ -54,7 +60,9 @@ gulp.task('inject', function(){
 });
 
 gulp.task('inject_replace', function(){
-  return gulp.src([tmpLayout])
+  var layout = [tmpLayout];
+  // layout = layout.concat( layout_inject );
+  return gulp.src(layout)
     .pipe(replace('/public/jsOut', '/s/jsOut'))
     .pipe(gulp.dest(viewFolder));
 });
