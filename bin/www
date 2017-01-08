@@ -15,7 +15,7 @@ global.conf = require(__dirname + '/../config');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(conf.IO.port);
+var port = normalizePort(conf.port);
 
 /**
  * Create HTTP server.

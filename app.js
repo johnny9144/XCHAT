@@ -66,8 +66,10 @@ app.use(function ( req, res, next){
     if (!opts) {
       opts = {};
     }
+    var protocol = "http";
     opts.serverInfo = {
-      IO: conf.IO.url + ":" + conf.IO.port,
+      IO: protocol + "://" + conf.host + ":" + conf.port,
+      host: conf.host
     };
 
     if ( process.env.NODE_CHAT && process.env.NODE_CHAT === "production" ) {

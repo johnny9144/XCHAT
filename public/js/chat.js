@@ -1,5 +1,5 @@
 /*eslint-env browser*/
-/* globals SOCKET, USER, ENV*/
+/* globals SOCKET, USER, ENV, siteUrl*/
 $(function (){
   // $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
   SOCKET.on("connect", function (){
@@ -38,7 +38,7 @@ $(function (){
       var from = "<li class=\"row from\"><span class=\"bubble\"></span></li>";
       var to = "<li class=\"row to\"><span class=\"bubble\"></span></li>";
       for ( var i = 0, imax = result.length; i < imax; i+=1) {
-        if ( result[i].from=== target) {
+        if ( result[i].from === target) {
           $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
         } else {
           $targetRoom.find("ul").append( from).find(".from .bubble:last").text( result[i].content);
@@ -62,6 +62,9 @@ function receive(data){
   var $from = $("#"+ data.from);
   $from.find("ul").append(to).find(".to .bubble:last").text(data.msg);
   $from.scrollTop( $from[0].scrollHeight);
+  if (Notification.permission === "granted") {
+    notifyMe( "xChat", "您有新的訊息");
+  }
 }
 
 function getMessages ( roomId, from, count, callback) {
@@ -77,4 +80,15 @@ function getMessages ( roomId, from, count, callback) {
       console.error( err);
     }
   });
+}
+
+function notifyMe( title, content) {
+  var notification = new Notification( title, {
+    // icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
+    body: content,
+  });
+
+  notification.onclick = function () {
+    window.open( siteUrl);
+  };
 }

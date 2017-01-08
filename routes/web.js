@@ -7,10 +7,16 @@ var chat = require( __dirname + '/../libs/chat');
 
 debug( "load");
 router.get( '/login', function ( req, res){
+  if ( req.session && req.session.user) {
+    return res.render( 'chat', { user: req.session.user });
+  }
   return res.render( 'member/login');
 });
 
 router.get( '/', function ( req, res){
+  if ( req.session && req.session.user) {
+    return res.render( 'chat', { user: req.session.user });
+  }
   return res.render( 'member/login');
 });
 
