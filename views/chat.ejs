@@ -32,12 +32,12 @@
 </div>
 <script src="/s/js/socket.io.js"></script>
 <script>
-<!-- var $SCROLL = $(".block-right .content"); -->
-var ENV = "<% if ( env === "production" ) { %>production<% } %>";
-var USER = "<% if (user) { %><%= user._id %><% } %>";
-if ( !USER && ENV === "production") {
-  location.href( "/login");
-}
+<% if ( !user  || !user._id) { %>
+  document.location.href( "/login");
+<% } %>
+var ENV = "<%= env %>";
+var USER = "<%= user._id %>";
+var $SCROLL = $(".block-right .content");
 var siteUrl = "<%=serverInfo.IO%>";
 var SOCKET = io( siteUrl);
 document.addEventListener('DOMContentLoaded', function () {
