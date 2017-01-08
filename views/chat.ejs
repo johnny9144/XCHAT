@@ -38,7 +38,13 @@ var USER = "<% if (user) { %><%= user._id %><% } %>";
 if ( !USER && ENV === "production") {
   location.href( "/login");
 }
-var SOCKET = io('<%=serverInfo.IO%>');
+var siteUrl = "<%=serverInfo.IO%>";
+var SOCKET = io( siteUrl);
+document.addEventListener('DOMContentLoaded', function () {
+  if (Notification.permission !== "granted") {
+    Notification.requestPermission();
+  }
+});
 </script>
 <script src="/s/js/chat.js"></script>
 <%- include footer.ejs -%>
