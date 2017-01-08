@@ -7,7 +7,7 @@
         <ul>
           <li class="search"><input class="input"type="text" name="search" placeholder="Search"></li>
           <% for( var key in user.friends) { %>
-          <li data-target="<%= key %>" class="friends">
+          <li data-target="<%= key %>" class="friends" data-roomid="<%=user.friends[key].roomId %>">
             <div class="user"><%=user.friends[key].name%></div>
             <div class="first"></div>
           </li>
@@ -32,7 +32,7 @@
 </div>
 <script src="/s/js/socket.io.js"></script>
 <script>
-var $SCROLL = $(".block-right .content");
+<!-- var $SCROLL = $(".block-right .content"); -->
 var ENV = "<% if ( env === "production" ) { %>production<% } %>";
 var USER = "<% if (user) { %><%= user._id %><% } %>";
 if ( !USER && ENV === "production") {

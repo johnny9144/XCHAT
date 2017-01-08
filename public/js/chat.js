@@ -1,5 +1,5 @@
 /*eslint-env browser*/
-/* globals $SCROLL, SOCKET, USER, ENV*/
+/* globals SOCKET, USER, ENV*/
 $(function (){
   // $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
   SOCKET.on("connect", function (){
@@ -29,9 +29,23 @@ $(function (){
 
   $(".friends").on( "click", function(){
     var $this = $(this);
+    var target = $this.data("target");
+    var $targetRoom = $("#"+target);
     $(".msgEnter input").data("target", $this.data("target")).attr("placeholder", "Write a message...").attr("disabled",false);
     $(".block-content .content").css("display", "none");
-    $("#"+$this.data("target")).css("display", "block");
+    $("#"+target).css("display", "block");
+    getMessages( $this.data("roomid"), 0, 1500, function ( result){
+      var from = "<li class=\"row from\"><span class=\"bubble\"></span></li>";
+      var to = "<li class=\"row to\"><span class=\"bubble\"></span></li>";
+      for ( var i = 0, imax = result.length; i < imax; i+=1) {
+        if ( result[i].from=== target) {
+          $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
+        } else {
+          $targetRoom.find("ul").append( from).find(".from .bubble:last").text( result[i].content);
+        }
+      }
+      $targetRoom.scrollTop( $targetRoom[0].scrollHeight);
+    });
   });
 });
 
@@ -50,3 +64,17 @@ function receive(data){
   $from.scrollTop( $from[0].scrollHeight);
 }
 
+function getMessages ( roomId, from, count, callback) {
+  $.ajax({
+    method: "GET",
+    url: "messages",
+    dateType: "json",
+    data: { roomId: roomId, from: from, count: count},
+    success: function ( result) {
+      callback( result);
+    },
+    error: function ( err){
+      console.error( err);
+    }
+  });
+}
