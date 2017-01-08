@@ -3,6 +3,7 @@ var debug = require("debug")("dev:web.js");
 var express = require('express');
 var router = express.Router();
 var auth = require( __dirname + '/../libs/auth');
+var chat = require( __dirname + '/../libs/chat');
 
 debug( "load");
 router.get( '/login', function ( req, res){
@@ -38,8 +39,18 @@ router.get( '/registrar', function( req, res) {
   return res.render( 'registrar');
 });
 
-router.post( '/getMessages', function ( req, res) {
-
+router.get( '/messages', function ( req, res) {
+  var data = req.query;
+  if ( !data || !data.roomId || !data.from || !data.count) {
+    return res.sendStatus( 404);
+  }
+  chat.getMessages ( data.roomId, data.from, data.count, function ( err, docs) {
+    if ( err) {
+      debug( err);
+      return res.sendStatus( 500);
+    }
+    res.send( docs);
+  });
 });
 
 module.exports = router;

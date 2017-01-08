@@ -1,7 +1,7 @@
 "use strict";
 var debug = require("debug")("dev:socketIO");
 var async = require("async");
-var ObjectID = require('mongodb').ObjectID;
+var ObjectId = require('mongodb').ObjectId;
 var self = module.exports;
 var userStatus = {};
 var room = {};
@@ -30,7 +30,7 @@ self.IO = function ( io) {
             // 檢查room裡面有沒有 room id
             if ( room && ( room[data.target+data.from] || room[data.from+data.target])){          
               debug("got rooms");
-              return done( null, ObjectID( room[data.target+data.from] ? room[data.target+data.from] : room[data.from+data.target]));
+              return done( null, ObjectId( room[data.target+data.from] ? room[data.target+data.from] : room[data.from+data.target]));
             }
             // 檢查db裡面是否已經有存在 room id
             db.collection("messages").findOne( { $or: [ { a: data.target, b: data.from}, { a: data.from, b: data.target }]}, function ( err, obj) {
@@ -49,10 +49,10 @@ self.IO = function ( io) {
                   }
                   var temp = { $set: {} };
                   temp.$set["friends."+data.target+".roomId"] = init._id.toString();
-                  db.collection("user").updateOne({ _id: ObjectID( data.from)}, temp);
+                  db.collection("user").updateOne({ _id: ObjectId( data.from)}, temp);
                   temp = { $set: {} };
                   temp.$set["friends."+data.from+".roomId"] = init._id.toString();
-                  db.collection("user").updateOne({ _id: ObjectID( data.target)}, temp);
+                  db.collection("user").updateOne({ _id: ObjectId( data.target)}, temp);
                   room[data.target+data.from] = init._id.toString();
                   return done( null, init._id);
                 });
