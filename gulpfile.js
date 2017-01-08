@@ -15,6 +15,8 @@ var tmpLayoutName = 'layout_tmp.ejs';
 var tmpLayout = viewFolder+'/'+tmpLayoutName;
 var finalLayoutName = 'layout.ejs';
 var finalLayout = viewFolder+'/'+finalLayoutName;
+var browserSync = require('browser-sync').create();
+var conf = require( __dirname + "/config.js");
 var js = [
   "./public/js/jquery.min.js",
   "./public/bootstrap/js/bootstrap.min.js",
@@ -92,6 +94,18 @@ gulp.task('sym_layout', function(){
 
 gulp.task('clean:all', function(){
   return del([finalLayout, tmpLayout, './public/jsOut']);
+});
+
+gulp.task('monitor', function () {
+  browserSync.init({
+    proxy: "localhost:" + conf.port
+  });
+
+  var watchFile = [
+    'public/**/*.*',
+    'views/**/*.html'
+  ];
+  gulp.watch(watchFile).on('change', browserSync.reload);
 });
 
 gulp.task('default', gulpsync.sync([

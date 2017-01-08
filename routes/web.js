@@ -20,12 +20,20 @@ router.get( '/', function ( req, res){
   return res.render( 'member/login');
 });
 
+router.get( '/logout', function ( req, res) {
+  if ( req.session && req.session.user) {
+    delete req.session.user;
+  }
+  return res.render( 'member/login');
+});
+
 router.post( '/login', function ( req, res){
   var data = req.body;
   auth.login( data.username, data.password, function ( doc) {
     if ( !doc) {
       return res.send({ code: 403, msg: "fail"});
     }
+
     req.session.user = {
       _id: doc._id.toString(),
       email: doc.email,
@@ -41,8 +49,8 @@ router.get( '/home', lr, function(req, res) {
   return res.render( 'chat', { user: req.session.user });
 });
 
-router.get( '/registrar', function( req, res) {
-  return res.render( 'registrar');
+router.get( '/regist', function( req, res) {
+  return res.render( 'regist');
 });
 
 router.get( '/messages', function ( req, res) {

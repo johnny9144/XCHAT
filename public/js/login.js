@@ -2,6 +2,9 @@
 /* globals */
 $(function (){
   $("button.login").on( "click", valid);
+  $("button.registrar").on( "click", function () {
+    document.location.href("/regist");
+  });
 });
 
 function valid (e) {

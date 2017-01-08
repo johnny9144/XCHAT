@@ -6,3 +6,4 @@ public/jsOut/
 public/css/
 config-ote.js
 config-server.js
+views/layout_tmp.ejs
