@@ -2,8 +2,6 @@
 node_modules/
 npm-debug.log
 config.js
-config-server.js
-config-ote.js
 public/jsOut/
 public/css/
 config-ote.js
