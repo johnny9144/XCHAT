@@ -66,17 +66,17 @@ app.use(function ( req, res, next){
     if (!opts) {
       opts = {};
     }
-    var protocol = "http";
-    opts.serverInfo = {
-      IO: protocol + "://" + conf.host + ":" + conf.port,
-      host: conf.host
-    };
 
     if ( process.env.NODE_CHAT && process.env.NODE_CHAT === "production" ) {
       opts.env = "production";
     } else {
       opts.env = "dev";
     }
+
+    var protocol = "http";
+    opts.serverInfo = {
+      IO: protocol + "://" + conf.host + ":" + ( opts.env === "production" ? 80 : conf.port)
+    };
     // User
     // if (req.session.user) {
     //   opts.user = {

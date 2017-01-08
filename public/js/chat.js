@@ -1,5 +1,5 @@
 /*eslint-env browser*/
-/* globals SOCKET, USER, ENV, siteUrl*/
+/* globals SOCKET, USER, siteUrl, ENV*/
 $(function (){
   // $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
   SOCKET.on("connect", function (){
@@ -13,7 +13,7 @@ $(function (){
   });
 
   SOCKET.on('disconnect', function (){
-    if ( !USER && ENV === "production") {
+    if ( ENV === "production" ) { 
       document.location.href="/login";
     }
   });
