@@ -1,7 +1,9 @@
 "use strict";
 var self = module.exports;
 var crypto = require('crypto');
-var debug = require('debug')('dev');
+var debug = require('debug')('dev:libs:auth');
+
+debug( "load");
 self.login = function ( username, pw, next) {
   var md5 = crypto.createHash('md5');
   pw += 'JOhnnY';

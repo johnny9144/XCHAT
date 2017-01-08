@@ -33,7 +33,7 @@
 <script src="/s/js/socket.io.js"></script>
 <script>
 <% if ( !user  || !user._id) { %>
-  document.location.href( "/login");
+  document.location.href = "/login";
 <% } %>
 var ENV = "<%= env %>";
 var USER = "<%= user._id %>";

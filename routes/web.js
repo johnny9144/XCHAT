@@ -50,7 +50,7 @@ router.get( '/home', lr, function(req, res) {
 });
 
 router.get( '/regist', function( req, res) {
-  return res.render( 'regist');
+  return res.render( 'member/regist');
 });
 
 router.get( '/messages', function ( req, res) {

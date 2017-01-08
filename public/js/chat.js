@@ -14,7 +14,7 @@ $(function (){
 
   SOCKET.on('disconnect', function (){
     if ( ENV === "production" ) { 
-      document.location.href="/login";
+      document.location.href = "/login";
     }
   });
 
