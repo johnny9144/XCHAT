@@ -16,10 +16,13 @@
         </ul>
       </div>      
       <div class="block-right block-content col-md-offset-3 col-md-8">
-        <div class="row content">
+        <div class="row content default"></div>
+        <% for( var key in user.friends) { %>
+        <div class="row content none" id="<%= key %>">
           <ul>
           </ul>
-        </div>        
+        </div>
+        <% } %>
         <div class="row msgEnter">
           <input class="input" placeholder="Please choose the contact first..." name="message" autocomplete="off" disabled/>
         </div>        
@@ -32,7 +35,7 @@
 var $SCROLL = $(".block-right .content");
 var ENV = "<% if ( env === "production" ) { %>production<% } %>";
 var USER = "<% if (user) { %><%= user._id %><% } %>";
-if ( !USER) {
+if ( !USER && ENV === "production") {
   location.href( "/login");
 }
 var SOCKET = io('<%=serverInfo.IO%>');
