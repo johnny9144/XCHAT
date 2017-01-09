@@ -40,7 +40,7 @@ var USER = "<%= user._id %>";
 var $SCROLL = $(".block-right .content");
 var siteUrl = "<%=serverInfo.IO%>";
 var SOCKET = io( siteUrl);
-var flashTitle = {};
+var flashTitle = "";
 document.addEventListener('DOMContentLoaded', function () {
   if (Notification.permission !== "granted") {
     Notification.requestPermission();

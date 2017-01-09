@@ -49,6 +49,7 @@ $(function (){
   });
   $( window).on("focus", function () {
     clearInterval( flashTitle);
+    flashTitle = "";
     document.title = "Coox";
   });
 });
@@ -67,14 +68,16 @@ function receive(data){
   $from.find("ul").append(to).find(".to .bubble:last").text(data.msg);
   $from.scrollTop( $from[0].scrollHeight);
   if ( Notification.permission === "granted") {
+    notifyMe( "xChat", "您有新的訊息");
+  }
+  if (!flashTitle) {
     flashTitle = setInterval( function () {
       if ( document.title === "Coox") {
         document.title = "you have messages";
       } else {
         document.title = "Coox";
       }
-    }, 1000 * 3);
-    notifyMe( "xChat", "您有新的訊息");
+    }, 1000 * 2);
   }
 }
 
