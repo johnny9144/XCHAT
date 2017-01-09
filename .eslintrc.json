@@ -24,7 +24,8 @@
       "no-empty": "off",
       "no-unused-vars": [
          "error", { "vars": "all", "args": "none"}
-      ]
+      ],
+      "no-global-assign": "off"
     },
     "globals": {
       "$": false,

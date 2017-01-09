@@ -29,6 +29,9 @@ var jsOther = [
   "./public/js/login.js"
 ];
 
+browserSync.init({
+  proxy: "localhost:" + conf.port
+});
 // var layout_inject = [
 //   "./views/member/login.ejs",
 //   "./views/chat.ejs"
@@ -50,8 +53,8 @@ gulp.task('scripts', function(){
 
 gulp.task('copy_layout', function(){                                                                   
   return gulp.src(orgLayout)   
-  .pipe(rename(tmpLayoutName ))      
-  .pipe(gulp.dest(viewFolder));   
+    .pipe(rename(tmpLayoutName ))      
+    .pipe(gulp.dest(viewFolder));   
 });
 
 gulp.task('inject', function(){
@@ -96,19 +99,26 @@ gulp.task('clean:all', function(){
   return del([finalLayout, tmpLayout, './public/jsOut']);
 });
 
-gulp.task('monitor', function () {
-  browserSync.init({
-    proxy: "localhost:" + conf.port
-  });
+gulp.task('default', gulpsync.sync(
+  [
+    'clean:all',
+    'scripts', 'other_js', 
+    'copy_layout', 'inject', 'inject_replace', 'sym_layout'
+  ]
+)
+);
 
-  var watchFile = [
-    'public/**/*.*',
-    'views/**/*.html'
-  ];
-  gulp.watch(watchFile).on('change', browserSync.reload);
+gulp.task('reload', function () {
+  browserSync.reload();
 });
 
-gulp.task('default', gulpsync.sync([
-  'clean:all',
-  'scripts', 'other_js', 
-  'copy_layout', 'inject', 'inject_replace', 'sym_layout']));
+gulp.task('layout', gulpsync.sync(['clean:all', 'sym_layout','copy_layout', 'inject', 'inject_replace', 'sym_layout', 'reload']));
+
+gulp.task('monitor', function () {
+  var watchFile = [
+    'public/**/*.*',
+    'views/**/*.ejs'
+  ];
+  gulp.watch( watchFile, ['layout']);
+});
+

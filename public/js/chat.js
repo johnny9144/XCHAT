@@ -1,5 +1,5 @@
 /*eslint-env browser*/
-/* globals SOCKET, USER, siteUrl, ENV*/
+/* globals SOCKET, USER, siteUrl, ENV, flashTitle */
 $(function (){
   // $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
   SOCKET.on("connect", function (){
@@ -47,6 +47,10 @@ $(function (){
       $targetRoom.scrollTop( $targetRoom[0].scrollHeight);
     });
   });
+  $( window).on("focus", function () {
+    clearInterval( flashTitle);
+    document.title = "Coox";
+  });
 });
 
 function sendMsg( SOCKET, msg, target) {
@@ -62,7 +66,14 @@ function receive(data){
   var $from = $("#"+ data.from);
   $from.find("ul").append(to).find(".to .bubble:last").text(data.msg);
   $from.scrollTop( $from[0].scrollHeight);
-  if (Notification.permission === "granted") {
+  if ( Notification.permission === "granted") {
+    flashTitle = setInterval( function () {
+      if ( document.title === "Coox") {
+        document.title = "you have messages";
+      } else {
+        document.title = "Coox";
+      }
+    }, 1000 * 3);
     notifyMe( "xChat", "您有新的訊息");
   }
 }
