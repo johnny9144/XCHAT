@@ -2,6 +2,7 @@
 /* globals SOCKET, USER, siteUrl, ENV, flashTitle */
 $(function (){
   $(".chat").height($(".chat").width() * 0.58);
+
   SOCKET.on("connect", function (){
     if (USER !== ""){
       SOCKET.emit( 'regist', { secret: USER});
@@ -33,19 +34,22 @@ $(function (){
     var $targetRoom = $("#"+target);
     $(".msgEnter input").data("target", $this.data("target")).attr("placeholder", "Write a message...").attr("disabled",false);
     $(".block-content .content").css("display", "none");
-    $("#"+target).css("display", "block");
-    getMessages( $this.data("roomid"), 0, 1500, function ( result){
-      var from = "<li class=\"row from\"><span class=\"bubble\"></span></li>";
-      var to = "<li class=\"row to\"><span class=\"bubble\"></span></li>";
-      for ( var i = 0, imax = result.length; i < imax; i+=1) {
-        if ( result[i].from === target) {
-          $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
-        } else {
-          $targetRoom.find("ul").append( from).find(".from .bubble:last").text( result[i].content);
+    if( !$targetRoom.length ) {
+      $targetRoom = $("<div class=\"row content none\" id=\""+ target +"\"><ul></ul></div>").prependTo($(".block-right"));
+      getMessages( $this.data("roomid"), 0, 1500, function ( result) {
+        var from = "<li class=\"row from\"><span class=\"bubble\"></span></li>";
+        var to = "<li class=\"row to\"><span class=\"bubble\"></span></li>";
+        for ( var i = 0, imax = result.length; i < imax; i+=1) {
+          if ( result[i].from === target) {
+            $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
+          } else {
+            $targetRoom.find("ul").append( from).find(".from .bubble:last").text( result[i].content);
+          }
         }
-      }
-      $targetRoom.scrollTop( $targetRoom[0].scrollHeight);
-    });
+        $targetRoom.scrollTop( $targetRoom[0].scrollHeight);
+      });
+    }
+    $targetRoom.css("display", "block");
   });
   $( window).on("focus", function () {
     clearInterval( flashTitle);
