@@ -1,7 +1,7 @@
 /*eslint-env browser*/
 /* globals SOCKET, USER, siteUrl, ENV, flashTitle */
 $(function (){
-  // $SCROLL.scrollTop( $SCROLL[0].scrollHeight);
+  $(".chat").height($(".chat").width() * 0.58);
   SOCKET.on("connect", function (){
     if (USER !== ""){
       SOCKET.emit( 'regist', { secret: USER});
