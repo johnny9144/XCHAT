@@ -9,7 +9,7 @@ self.getMessages = function ( id, from, count, next) {
   db.collection("messages").aggregate([
     { $match: { "_id" : ObjectId( id)}},
     { $unwind: "$talk"},
-    { $project : { date: "$talk.date", from: "$talk.from", content: "$talk.content" }},
+    { $project : { date: "$talk.date", from: "$talk.from", content: "$talk.content", type: "$talk.type" }},
     { $sort: { "date": 1}},
     { $skip: parseInt( from, 10) },
     { $limit: parseInt( count, 10) }

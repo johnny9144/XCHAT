@@ -18,7 +18,13 @@
       <div class="block-right block-content col-md-ff">
         <div class="row content default"></div>
         <div class="row msgEnter">
-          <input class="input" placeholder="Please choose the contact first..." name="message" autocomplete="off" disabled/>
+          <input class="input" title="paste your code" placeholder="Please choose the contact first..." name="message" autocomplete="off" disabled/>
+          <div class="functions">
+            <span class="glyphicon glyphicon-th"></span>
+            <div class="fmenu" id="fmenu">
+              <span class="glyphicon glyphicon-folder-open" title="paste your code"></span>
+            </div>
+          </div>
         </div>        
       </div>
     </div>
@@ -28,18 +34,18 @@
 <script>
 <% if ( !user  || !user._id) { %>
   document.location.href = "/login";
-<% } %>
-var ENV = "<%= env %>";
-var USER = "<%= user._id %>";
-var $SCROLL = $(".block-right .content");
-var siteUrl = "<%=serverInfo.IO%>";
-var SOCKET = io( siteUrl);
-var flashTitle = "";
-document.addEventListener('DOMContentLoaded', function () {
-  if (Notification.permission !== "granted") {
-    Notification.requestPermission();
-  }
-});
+  <% } %>
+  var ENV = "<%= env %>";
+  var USER = "<%= user._id %>";
+  var $SCROLL = $(".block-right .content");
+  var siteUrl = "<%=serverInfo.IO%>";
+  var SOCKET = io( siteUrl);
+  var flashTitle = "";
+  document.addEventListener('DOMContentLoaded', function () {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+  });
 </script>
 <script src="/s/js/chat.js"></script>
 <%- include footer.ejs -%>

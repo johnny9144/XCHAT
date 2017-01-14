@@ -114,6 +114,9 @@ self.IO = function ( io) {
       }
     });
     socket.on( 'disconnect', function (){
+      for ( var user in userStatus) {
+        userStatus[user].splice( userStatus[user].indexOf( socket.id));
+      }
       // 之後可能想辦法去掉userStatus裡面的，並且去掉已經斷線的位置
       debug( 'user: ' + socket.id + ' leave');
     });

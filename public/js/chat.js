@@ -1,6 +1,14 @@
 /*eslint-env browser*/
 /* globals SOCKET, USER, siteUrl, ENV, flashTitle */
 $(function (){
+  $(".msgEnter .fmenu span").tooltipster({
+    theme: "tooltipster-borderless"
+  });
+
+  $(".msgEnter .functions").on( "mouseleave mouseenter", function () {
+    $(".msgEnter .fmenu").slideToggle("fast");
+  });
+
   $(".chat").height($(".chat").width() * 0.58);
 
   SOCKET.on("connect", function (){
@@ -41,9 +49,17 @@ $(function (){
         var to = "<li class=\"row to\"><span class=\"bubble\"></span></li>";
         for ( var i = 0, imax = result.length; i < imax; i+=1) {
           if ( result[i].from === target) {
-            $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
+            if ( result[i].type && result[i].type !== "") {
+              $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
+            } else {
+              $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
+            }
           } else {
-            $targetRoom.find("ul").append( from).find(".from .bubble:last").text( result[i].content);
+            if ( result[i].type && result[i].type !== "") {
+              $targetRoom.find("ul").append( from).find(".from .bubble:last").append( "<span class=\"glyphicon glyphicon-file code\"></span>");
+            } else {
+              $targetRoom.find("ul").append( from).find(".from .bubble:last").text( result[i].content);
+            }
           }
         }
         $targetRoom.scrollTop( $targetRoom[0].scrollHeight);

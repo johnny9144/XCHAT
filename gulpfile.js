@@ -117,8 +117,11 @@ gulp.task('layout', gulpsync.sync(['clean:all', 'sym_layout','copy_layout', 'inj
 gulp.task('monitor', function () {
   var watchFile = [
     'public/**/*.*',
-    'views/**/*.ejs'
+    'views/**/*.ejs',
+    'views/*.ejs',
+    'stylus/*.*'
   ];
+
   gulp.watch( watchFile, ['layout']);
 });
 
