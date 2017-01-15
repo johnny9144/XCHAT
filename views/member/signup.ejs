@@ -2,18 +2,25 @@
 <link rel="stylesheet" href="/s/css/member/login.css">
 <div class="container load">
 <div class="row loginBlock">
-  <form class="col-md-6 col-md-offset-3">
+  <form class="form-horizontal col-md-6 col-md-offset-3">
     <h1>Coox<span class="msg"></span> </h1>
     <div class="user col-md-12 input-group input-group-lg">
       <span class="input-group-addon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-      <input type="email" name="email" class="form-control" placeholder="Username" required autoFocus value="<% if ( env === "dev") { %>test@test.com <% } %>" />
+      <input type="email" name="email" class="form-control" placeholder="email" required autoFocus value="<% if ( env === "dev") { %>test@test.com <% } %>" />
     </div>
     <div class="pass col-md-12 input-group input-group-lg">
       <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
       <input type="password" name="password" class="form-control" placeholder="Password" required value="<% if ( env === "dev" ) { %>test<% } %>"/>
     </div>
-    <div class="col-md-12 input-group input-group-lg">
-      <button type="button" class="login btn lg ghost form-control">Login<i class="fa fa-sign-in" aria-hidden="true" style="margin-left: 30px;"></i></button>
+    <div class="pass col-md-12 input-group input-group-lg">
+      <span class="input-group-addon"><i class="fa fa-eye" aria-hidden="true"></i></span>
+      <input type="password" name="revalid" class="form-control" placeholder="Revalid your password" required value="<% if ( env === "dev" ) { %>test<% } %>"/>
+    </div>
+    <div class="phone col-md-12">
+      <select class="form-control">
+        <option value="886">+886</option>
+      </select>
+      <input type="text" name="phone" class="form-control" placeholder="mobile" required value=""/>
     </div>
     <a class="col-md-12 input-group input-group-lg">
       <button type="button" class="regist btn lg ghost form-control">Sign Up<i class="fa fa-sign-in" aria-hidden="true" style="margin-left: 30px;"></i></button>

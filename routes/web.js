@@ -44,12 +44,12 @@ router.post( '/login', function ( req, res){
   });
 });
 
-router.get( '/home', lr, function(req, res) {
-  return res.render( 'chat', { user: req.session.user });
+router.get( "/signup", function ( req, res) {
+  return res.render( 'member/signup');
 });
 
-router.get( '/regist', function( req, res) {
-  return res.render( 'member/regist');
+router.get( '/home', lr, function(req, res) {
+  return res.render( 'chat', { user: req.session.user });
 });
 
 module.exports = router;

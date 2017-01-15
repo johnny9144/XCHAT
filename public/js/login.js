@@ -3,7 +3,7 @@
 $(function (){
   $("button.login").on( "click", valid);
   $("button.regist").on( "click", function () {
-    document.location.href = "/regist";
+    document.location.href = "/signup";
   });
 });
 

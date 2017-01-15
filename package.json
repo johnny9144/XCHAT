@@ -25,9 +25,12 @@
     "gulp-sym": "^0.0.14",
     "gulp-sync": "^0.1.4",
     "gulp-uglify": "^2.0.0",
+    "helmet": "^3.4.0",
     "mongodb": "^2.2.12",
     "morgan": "~1.7.0",
     "nib": "^1.1.2",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
     "serve-favicon": "~2.3.0",
     "socket.io": "^1.7.1",
     "stylus": "^0.54.5"

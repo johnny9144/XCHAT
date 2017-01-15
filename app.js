@@ -17,12 +17,15 @@ var stylus = require("stylus");
 var nib = require("nib");
 var web = require('./routes/web');
 var api = require('./routes/api');
+var passport = require("passport");
+var helmet = require("helmet");
 require(__dirname + '/libs/socketIO').IO(io);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use( helmet());
 // uncomment after placing your favicon in /public
 app.use(favicon(path.join( __dirname, 'public/images', 'favicon.ico')));
 // app.use(logger('dev'));
@@ -48,11 +51,14 @@ function compile(str, path) {
 
 app.use(session({
   store: new MongoStore({url: conf.mongodb}),
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  saveUninitialized: true,
   secret: 'rubyANdJohnny',
   cookie: { maxAge: 1000 * 60 * 60 * 24 },
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 debug("app.js load");
 
