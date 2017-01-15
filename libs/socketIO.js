@@ -69,7 +69,8 @@ self.IO = function ( io) {
                   talk: {
                     date: new Date(), 
                     from: data.from, 
-                    content: data.msg
+                    content: data.msg,
+                    type: data.type
                   }
                 }
               }, {
@@ -88,7 +89,7 @@ self.IO = function ( io) {
             if ( target && target.length > 0) {
               async.each( target, function ( addr, next) {
                 try {
-                  io.to( addr).emit( "msgOut", { from: data.from, msg: data.msg});
+                  io.to( addr).emit( "msgOut", { from: data.from, msg: data.msg, type: data.type});
                 } catch(e) {
                   // 拿掉無法傳送的位置
                   userStatus[data.target].splice( userStatus[data.target].indexOf( userStatus[data.target][addr]));

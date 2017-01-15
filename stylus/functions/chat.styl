@@ -100,6 +100,7 @@
     .msgEnter {
       height: 11%
       position: relative
+      display: none
 
       .input {
         height: 86%
@@ -109,10 +110,11 @@
         float: left
       }
       .functions {
-        font-size: 70px
+        /* font-size: 70px */
         color: rgba(221, 221, 221, 0.4)
         margin: 0 0 0 0.4%
-        /* float: left */
+        float: left
+        width: 6%
         height: 86%
         &:hover {
           color: rgba(221, 221, 221, 1)
@@ -123,14 +125,14 @@
       .fmenu {
         display: none
         background: rgba( 0, 0, 0, 0.8)
-        top: -169%;
+        top: -155%;
         height: 70%
-        width: 8%;
-        margin-left: 90%;
+        width: 100%;
+        /* margin-left: 90%; */
         position: relative
-        line-height: 0.7
+        /* line-height: 0.7 */
         border-radius: 10px;
-        padding: 0.7% 0 0 1%;
+        padding: 9% 0 0 12%;
         span {
           font-size: 50px
           cursor: pointer
@@ -167,7 +169,7 @@
         height: 10%
         color: white
         padding: 10px
-        border-radius: 10px 10px 0 0
+        /* border-radius: 10px 10px 0 0 */
         margin: 5px 0 0 0
 
         &:hover {
@@ -216,4 +218,10 @@
       border:1px solid white
     }
   }
+}
+
+.codeText {
+  width: 100%
+  min-height: 100px
+  max-height: 500px
 }
