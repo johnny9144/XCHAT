@@ -149,7 +149,7 @@ $(function (){
         var to = "<li class=\"row to\"><span class=\"bubble\"></span></li>";
         for ( var i = 0, imax = result.length; i < imax; i+=1) {
           if ( result[i].from === target) {
-            if ( result[i].type && result[i].type !== "") {
+            if ( result[i].type && result[i].type !== "text") {
               $targetRoom.find("ul").append( to).find(".to .bubble:last").append( "<span class=\"glyphicon glyphicon-file code\" data-url=\""+ result[i].content +"\"></span>");
             } else {
               $targetRoom.find("ul").append( to).find(".to .bubble:last").text( result[i].content);
